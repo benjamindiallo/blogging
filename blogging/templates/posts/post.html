@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Send</button>
+    </form>
+
+    <div>
+        <form action="/follow" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="follow" value="{{ user_id }}">
+            <input type="submit" value="Follow">
+        </form>
+        Posts from {{ user.username }}
+        <ul>
+            {% for post in user_posts %}
+            <li><div>{{ post.create_at }}</div><div>{{ post.message }}</div></li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

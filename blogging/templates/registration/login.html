@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load bootstrap3 %}
+
+{% block extra_head %}
+    <link href="{% static 'css/signin.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-4 col-sm-offset-4">
+
+        {% if form.errors %}
+        <p>Your username and password didn't match. Please try again.</p>
+        {% endif %}
+
+        {% if next %}
+            {% if user.is_authenticated %}
+            <p>Your account doesn't have access to this page. To proceed,
+            please login with an account that has access.</p>
+            {% else %}
+            <p>Please login to see this page.</p>
+            {% endif %}
+        {% endif %}
+
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <h2 class="form-signin-heading">Please sign in</h2>
+            {% bootstrap_form form %}
+            {% buttons %}
+                <button type="submit" class="btn btn-lg btn-primary btn-block">Login in</button>
+            {% endbuttons %}
+            <div class="form-group">
+                <a href="{% url 'password_reset' %}">Forgot your password?</a>
+            </div>
+        </form>
+
+    </div>
+</div><!-- endrow -->
+
+
+{% endblock %}

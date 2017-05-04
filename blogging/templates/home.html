@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% load bootstrap3 %}
+
+{% block content %}
+<div class="row">
+    
+    <div class="col-sm-3">
+        <form method="post">
+            {% csrf_token %}
+            <h3>{% bootstrap_label "Write here" label_for="id_message" %}</h3>
+            {% bootstrap_field form.message show_label=False %}
+            <button type="submit" class="btn btn-lg btn-primary btn-block">Send</button>
+        </form>
+    </div>
+
+    <div class="col-sm-7">
+        <h2>Feed</h2>
+        <div class="list-group">
+            {% for feed_post in feed_posts %}
+                <div class="list-group-item">
+                    <div class="list-group-item-heading">
+                        <a href="{% url 'profile:profile' username=feed_post.user.username %}">
+                            <strong>@{{ feed_post.user.username }}</strong>
+                        </a>
+                        <em>{{ feed_post.create_at }}</em>
+                    </div>
+                    <p class="list-group-item-text">{{ feed_post.message }}</p>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="pagination-wrapper">
+            {% if feed_posts.has_other_pages %}
+                <ul class="pagination">
+                    {% if feed_posts.has_previous %}
+                        <li><a href="?page={{ feed_posts.previous_page_number }}">&laquo;</a></li>
+                    {% else %}
+                        <li class="disabled"><span>&laquo;</span></li>
+                    {% endif %}
+                    {% for i in feed_posts.paginator.page_range %}
+                        {% if feed_posts.number == i %}
+                            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                        {% else %}
+                            <li><a href="?page={{ i }}">{{ i }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                    {% if feed_posts.has_next %}
+                        <li><a href="?page={{ feed_posts.next_page_number }}">&raquo;</a></li>
+                    {% else %}
+                        <li class="disabled"><span>&raquo;</span></li>
+                    {% endif %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+body {
+    padding-top: 70px;
+    padding-bottom: 40px;
+    /*background-color: #eee;*/
+}
+
+.pagination-wrapper {
+    text-align: center;
+}
+
+
+/* helpers */
+.row .centered{
+   float: none;
+   margin-right: auto;
+   margin-left: auto;
+}

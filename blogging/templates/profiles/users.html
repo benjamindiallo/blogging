@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+
+    <h2>List of users</h2>
+    <div class="list-group">
+        {% for user in users %}
+            <a href="{% url 'profile:profile' username=user.username %}" class="list-group-item">
+                <strong>@{{ user.username }}</strong>
+            </a>
+        {% endfor %}
+    </div>
+
+    </div>
+</div>
+{% endblock %}

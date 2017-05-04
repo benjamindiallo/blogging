@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+
+    <h2>{{ profile.username }}'s followings</h2>
+    <div class="list-group">
+        {% for profile in followings %}
+            <a href="{% url 'profile:profile' username=profile.user.username %}" class="list-group-item">
+                <strong>@{{ profile.user.username }}</strong>
+            </a>
+        {% endfor %}
+    </div>
+    {% if followings.has_other_pages %}
+        <ul class="pagination">
+            {% if followings.has_previous %}
+                <li><a href="?page={{ followings.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+                <li class="disabled"><span>&laquo;</span></li>
+            {% endif %}
+            {% for i in followings.paginator.page_range %}
+                {% if followings.number == i %}
+                    <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                {% else %}
+                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+            {% endfor %}
+            {% if followings.has_next %}
+                <li><a href="?page={{ followings.next_page_number }}">&raquo;</a></li>
+            {% else %}
+                <li class="disabled"><span>&raquo;</span></li>
+            {% endif %}
+        </ul>
+    {% endif %}
+
+    </div>
+</div>
+{% endblock %}
+
