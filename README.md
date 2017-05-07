@@ -1,6 +1,6 @@
 # blogging
 A simple micro-blogging web application.
-Please note that this application is under development.
+Please note that this application is still under development.
 
 ## Todo
 * add unit test
