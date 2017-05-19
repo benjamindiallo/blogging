@@ -10,4 +10,4 @@ Please note that this application is still under development.
 The package django-decouple is used to set-up environment settings. Therefore, a file .env with your own settings must be created, see [.env.example](../master/.env.example) for futher details.
 
 ### Prerequisites
-See [requirement.txt](../master/.requirement.txt)
+See [requirement.txt](../master/requirement.txt)
