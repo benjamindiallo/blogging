@@ -23,5 +23,5 @@ urlpatterns = [
     url(r'^profile/(?P<username>[\w.@+-]+)/followings$', views.followings, name='followings'),
     url(r'^follow/', views.follow, name='follow'),
     url(r'^unfollow/', views.unfollow, name='unfollow'),
-    url(r'^users/$', views.users, name='users'),
+    url(r'^users/$', views.UserListView.as_view(), name='users'),
 ]

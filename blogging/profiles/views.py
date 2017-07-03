@@ -5,16 +5,18 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, redirect
+from django.views.generic.list import ListView
 
 from .forms import ProfileForm, UserForm
 
 from blogging.core.utils import paginator_wrapper
 
 
-def users(request):
-    users = User.objects.all().order_by('username')
-    context = {'users': users}
-    return render(request, 'profiles/users.html', context)
+class UserListView(ListView):
+    queryset = User.objects.all().order_by('username')
+    context_object_name = 'user_list'
+    template_name = 'profiles/user_list.html'
+    paginate_by = 4
 
 
 def login(request):
